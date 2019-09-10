@@ -75,7 +75,7 @@
 			        	}
 			        	if($count==0){
 				        	//Printing the error
-			        		echo '<span style="color:red;">'."<br>Incorrect username or password.".'</span>';	
+			        		echo '<br><span style="color:red;">'."<br>Incorrect username or password.".'</span>';	
 			        	}else if($count==1){
 			        		//If the username and password are matched then proceed to menu.php
 			        		$count=3;
