@@ -53,6 +53,10 @@ if($count==0){
        
       </div>
 
+      <!--To avoid the overlap in mobile view-->
+      <div class="jumbotron p-1">
+      </div>
+
       <!--Fixed div includes form - send messages-->
       <div class="jumbotron fixed-bottom p-4 m-0" style="background-color:rgb(243, 237, 150)">
             <form role="form" method="" action="">
