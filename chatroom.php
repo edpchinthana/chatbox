@@ -41,30 +41,8 @@ if($count==0){
       <div class="container jumbotron">
        <div class=" col-xs-12">
         <br>
-        <?php
-        include('includes/database.php');
-        $query="SELECT chat.message as 'message', users.name as 'userid',chat.dateTime from users inner join chat on users.id=chat.userId order by dateTime ASC;";
-        $result=$mysqli->query($query);
-        if($result->num_rows>0){
-            //Loop through results
-            while($row=$result->fetch_assoc()){
-                //Display student info
-                if($row['userid']==$username){
-                    $output  ='<div class="card border-primary float-right col-xs-8 m-2"><h5 class="card-title"><b>';
-                }
-                else{
-                $output  ='<div class="card border-warning float-left col-xs-8 m-2"><h5 class="card-title"><b>';
-                }
-                $output .=$row['userid'];
-                $output .='</b></h5>';
-                $output .= $row['message'].'<br>';
-                $output .='</div><br>';
-                echo $output;
-            }
-        }else{
-            echo '<span style="color:red;">Sorry, no students records were found</span>';
-        }
-        ?>
+        <div id="show">
+        </div>
         <br>
        </div>
        
@@ -83,6 +61,7 @@ if($count==0){
                         </div>
                     </div>
                     <?php
+                    include('includes/database.php');
                     if($_POST){
 			            	//submitting values
 			            	$txt=$_POST['text'];
@@ -103,5 +82,12 @@ if($count==0){
       
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        setInterval(function(){
+          $('#show').load('refresh.php')
+        },1000);
+      });
+    </script>
   </body>
 </html>
