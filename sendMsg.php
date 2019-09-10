@@ -14,7 +14,8 @@ if($count==0){
     //Create login query
     if($message!=""){
     $query="INSERT INTO `chat` (`userId`, `message`) VALUES ('$userid','$message');"; 
-    }
+    
 	//Get results
-    $result=$mysqli->query($query);        
+    $result=$mysqli->query($query);   
+    }
 ?>

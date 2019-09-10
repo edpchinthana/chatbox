@@ -1,5 +1,6 @@
 <!--Security system-->
 <?php
+session_start();
  $count=0;
 ?>
 
@@ -12,7 +13,6 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <title>Let's Chat</title>
-    <link rel="stylesheet" type="text/css" href="css/myCSS.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap2.min.css">
   </head>
@@ -53,7 +53,7 @@
                         <div class="row">
                             <div class="col-xs-12 col-md-4"></div>
                             <div class="card border-warning col-xs-12 col-md-4">
-                            <form role="form" method="post" action="index.php">
+                            <form role="form" method="" action="">
                                 <div class="form-group">
                                     <br>
                                     <label>Username</label>
@@ -66,7 +66,7 @@
                                 <input type="submit" class="btn btn-warning w-25 mx-auto float-right" value="Login"/>
                                 <?php
                                     include('includes/database.php');
-                                    session_start();
+                                    
                                     $username="dasdad";
                                     $userid="999";
                                     
@@ -109,7 +109,7 @@
                         $_SESSION['varname2']=$abc;
                         $_SESSION['varname3']=$userid;
                 ?>    
-                            </form>
+                        </form>
                             
                             <br>
                         </div>
@@ -123,7 +123,7 @@
                   <div class="card-header" id="headingTwo">
                     <h5 class="mb-0">
                       <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        New member? Click here to Signup
+                        New member? Click here to SignUp
                       </button>
                     </h5>
                   </div>
@@ -132,7 +132,7 @@
                         <div class="row">
                             <div class="col-xs-12 col-md-1"></div>
                             <div class="card border-warning col-xs-12 col-md-10 ">
-                            <form role="form" method="post" action="index.php">
+                            <form role="form" method="" action="">
                               <br>
                               <div class="row">
                                 <div class="form-group col-md-6">
@@ -150,65 +150,30 @@
                                     <label>Email Address</label>
                                     <input name="email" type="email" class="form-control" placeholder="Email Address">
                                 </div>
-
-                                
+      
                                 <div class="form-group">
                                     <label>Username</label>
                                     <div class="row">
                                     <div class="col-md-6">
-                                    <input name="username" type="username" class="form-control" placeholder="Username">
+                                    <input id="username2" name="username2" type="username" class="form-control" placeholder="Username">
                                   </div>
-                                <input type="submit" class="col-md-2 btn btn-success " value="Check"/>
-                              </div></div>
+                                <input type="button" name="check" class="col-md-2 btn btn-success" onclick="checkNames();" value="Check"/>
+                                <div class="col-md-4" id="showName">
+
+                                </div>  
                               
-                                <div class="form-group">
+                            </div></div>
+                              <div class="row">
+                                <div class="form-group col-md-6">
                                     <label>Password</label>
-                                    <input name="password" type="password" class="form-control" placeholder="Password">
-                                </div>
-                                <input type="submit" class="btn btn-warning w-25 mx-auto float-right" value="SignUp"/>
-                                <?php                                                                    
-                                    $username="dasdad";
-                                    $userid="999";
-                                    
-                              if($_POST){
-                                //submitting values
-                                $username =$_POST['username'];
-                                $password =$_POST['password'];
-                                $count=0;
-              
-                            //Create login query
-                                $query="SELECT password,id FROM users where username='$username';"; 
-                            //Get results
-                                $result=$mysqli->query($query);
-                            //Check if the end of the results
-                                if($result->num_rows>0){
-                                  //Loop through results
-                                  while($row = $result->fetch_assoc()){
-                                if($row['password']==$password){
-                                              $count=1;
-                                              $userid=$row['id'];
-                              }
-                            }
-                            if($count==0){
-                              //Printing the error
-                              echo '<br><span style="color:red;">'."<br>Incorrect username or password.".'</span>';	
-                            }else if($count==1){
-                              //If the username and password are matched then proceed to menu.php
-                              $count=3;
-                              header("Location:chatroom.php");
-                              }
-                                }
-                              else{
-                            //Printing the error
-                            echo '<span style="color:red;">'."Incorrect username or password.".'</span>';
-                          }
-                      }
-                  //Passing the count to next page-for security
-                        $_SESSION['varname1']=$count;
-                        $abc=strtolower($username);
-                        $_SESSION['varname2']=$abc;
-                        $_SESSION['varname3']=$userid;
-                ?>    
+                                    <input name="password2" type="password" class="form-control" placeholder="Password">
+                                </div></div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Re-Type Password</label>
+                                        <input name="rePassword2" type="password" class="form-control" placeholder="Password">
+                                    </div></div>
+                                <input type="button" class="btn btn-warning w-25 mx-auto float-right" value="SignUp"/>  
                             </form>
                             
                             <br>
@@ -229,5 +194,16 @@
     </div>   
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+
+    <!--Send messages when click send button-->
+    <script type="text/javascript">
+        function checkNames() {
+        var username3=$("#username2").val();   
+    // AJAX code to send data to php file.
+    $.post("checkNames.php",{username:username3});
+            //This is to refresh page after send a message
+            $('#showName').load('checkNames.php');
+    }
+        </script>
   </body>
 </html>

@@ -61,7 +61,7 @@
 				            $count=0;
 	
 			        	//Create login query
-			            	$query="SELECT password,id FROM users where name='$username';"; 
+			            	$query="SELECT password,id FROM users where username='$username';"; 
 			        	//Get results
 				            $result=$mysqli->query($query);
 			        	//Check if the end of the results
