@@ -55,7 +55,7 @@
                         $userid="999";
                         
 		            	if($_POST){
-			            	//submitting values
+                    //submitting values
 			            	$username =$_POST['username'];
 				            $password =$_POST['password'];
 				            $count=0;
@@ -89,7 +89,8 @@
 		    	}
 			//Passing the count to next page-for security
             $_SESSION['varname1']=$count;
-            $_SESSION['varname2']=$username;
+            $abc=strtolower($username);
+            $_SESSION['varname2']=$abc;
             $_SESSION['varname3']=$userid;
 		?>    
                 </form>

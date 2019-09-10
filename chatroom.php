@@ -53,7 +53,7 @@ if($count==0){
        
       </div>
       </div>
-      <div class="jumbotron fixed-bottom p-5 m-0" style="background-color:rgb(243, 237, 150)">
+      <div class="jumbotron fixed-bottom p-4 m-0" style="background-color:rgb(243, 237, 150)">
             <form role="form" method="" action="">
                     <div class="form-group">
                         <div class="row">
@@ -70,7 +70,7 @@ if($count==0){
       </div>
 	<!--Footer-->
       <footer class="footer">
-        <br>Project04<br>
+
       </footer>
 
       
