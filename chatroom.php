@@ -49,29 +49,18 @@ if($count==0){
       </div>
       </div>
       <div class="jumbotron fixed-bottom p-5 m-0" style="background-color:rgb(243, 237, 150)">
-            <form role="form" method="post" action="chatroom.php">
+            <form role="form" method="" action="">
                     <div class="form-group">
                         <div class="row">
                         <div class="col-xs-10">
-                        <input name="text" type="text" class="form-control" placeholder="Enter your message">
+                        <input name="text" id="message" type="text" class="form-control" placeholder="Enter your message">
                         </div>
                         <div class="col-xs-2">
-                        <input type="submit" class="btn btn-warning btn-block" value="Send"/>
+                        <button type="button" id="send" class="btn btn-warning btn-block" onclick="insertData()">Send</button>
                     </div>
                         </div>
                     </div>
-                    <?php
-                    include('includes/database.php');
-                    if($_POST){
-			            	//submitting values
-			            	$txt=$_POST['text'];
-				       
-			        	//Create login query
-			            	$query="INSERT INTO `chat` (`userId`, `message`) VALUES ('$userid','$txt');"; 
-			        	//Get results
-                            $result=$mysqli->query($query);  
-                    }  
-                    ?>
+                    
                 </form>
       </div>
 	<!--Footer-->
@@ -88,6 +77,33 @@ if($count==0){
           $('#show').load('refresh.php')
         },1000);
       });
+    </script>
+    <script type="text/javascript">
+      function insertData() {
+        var message=$("#message").val();    
+    // AJAX code to send data to php file.
+            $.ajax({
+                type: "POST",
+                url: "sendMsg.php",
+                data: {message:message},
+                dataType: "JSON",
+                success: function(data) {
+                 $("#message").html(data);
+                $("p").addClass("alert alert-success");
+                }
+            });
+    
+    }
+    
+      </script>
+    <script>
+    
+$(document).ready(function(){
+    $('#message').keypress(function(e){
+      if(e.keyCode==13)
+      $('#send').click();
+    });
+});
     </script>
   </body>
 </html>
