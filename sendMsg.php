@@ -11,8 +11,10 @@ if($count==0){
 <?php
     include('includes/database.php');
     $message=$_POST['message'];
-	//Create login query
-	$query="INSERT INTO `chat` (`userId`, `message`) VALUES ('$userid','$message');"; 
+    //Create login query
+    if($message!=""){
+    $query="INSERT INTO `chat` (`userId`, `message`) VALUES ('$userid','$message');"; 
+    }
 	//Get results
     $result=$mysqli->query($query);        
 ?>
