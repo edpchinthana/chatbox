@@ -59,7 +59,7 @@ if($count==0){
 
       <!--Fixed div includes form - send messages-->
       <div class="jumbotron fixed-bottom p-4 m-0" style="background-color:rgb(243, 237, 150)">
-            <form role="form" method="" action="">
+            <form role="form" id="sendForm" method="" action="">
                     <div class="form-group">
                         <div class="row">
                         <div class="col-xs-10">
@@ -119,6 +119,9 @@ if($count==0){
       $('#send').click();
     });
     });
+    $("#sendForm").submit(function(e) {
+    e.preventDefault();
+});
     </script>
 
   </body>
