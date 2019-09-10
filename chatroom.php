@@ -52,7 +52,8 @@ if($count==0){
        </div>
        
       </div>
-      </div>
+
+      <!--Fixed div includes form - send messages-->
       <div class="jumbotron fixed-bottom p-4 m-0" style="background-color:rgb(243, 237, 150)">
             <form role="form" method="" action="">
                     <div class="form-group">
@@ -61,18 +62,17 @@ if($count==0){
                         <input name="text" id="message" type="text" class="form-control" placeholder="Enter your message">
                         </div>
                         <div class="col-xs-2">
-                        <button type="button" id="send" class="btn btn-warning btn-block" onclick="insertData()">Send</button>
+                        <button type="button" id="send" class="btn btn-warning btn-block" onclick="insertData(); document.getElementById('message').value='';">Send</button>
                     </div>
                         </div>
                     </div>
                     
                 </form>
       </div>
+
 	<!--Footer-->
       <footer class="footer">
-
       </footer>
-
       
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
