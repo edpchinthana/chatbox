@@ -35,30 +35,30 @@ if($count==0){
         </nav>
         <h3 class="text-muted">Chat Room</h3>
       </div>
+    </div>
 
 	<!--Body-->
-      <div class="jumbotron" style="height:100vh;">
+      <div class="container jumbotron">
        <div class=" col-xs-12">
         <br>
         <?php
         include('includes/database.php');
-        $query="SELECT chat.message as 'message', users.name as 'userid' from users inner join chat on users.id=chat.userId;";
+        $query="SELECT chat.message as 'message', users.name as 'userid',chat.dateTime from users inner join chat on users.id=chat.userId order by dateTime ASC;";
         $result=$mysqli->query($query);
-
         if($result->num_rows>0){
             //Loop through results
             while($row=$result->fetch_assoc()){
                 //Display student info
                 if($row['userid']==$username){
-                    $output  ='<div class="card border-primary float-right col-xs-8"><h5 class="card-title"><b>';
+                    $output  ='<div class="card border-primary float-right col-xs-8 m-2"><h5 class="card-title"><b>';
                 }
                 else{
-                $output  ='<div class="card border-warning float-left col-xs-8"><h5 class="card-title"><b>';
+                $output  ='<div class="card border-warning float-left col-xs-8 m-2"><h5 class="card-title"><b>';
                 }
                 $output .=$row['userid'];
                 $output .='</b></h5>';
                 $output .= $row['message'].'<br>';
-                $output .='</div>';
+                $output .='</div><br>';
                 echo $output;
             }
         }else{
@@ -69,7 +69,8 @@ if($count==0){
        </div>
        
       </div>
-      <div class="jumbotron fixed-bottom p-5 m-0" style="background-color:rgb(150, 217, 243)">
+      </div>
+      <div class="jumbotron fixed-bottom p-5 m-0" style="background-color:rgb(243, 237, 150)">
             <form role="form" method="post" action="chatroom.php">
                     <div class="form-group">
                         <div class="row">
@@ -77,7 +78,7 @@ if($count==0){
                         <input name="text" type="text" class="form-control" placeholder="Enter your message">
                         </div>
                         <div class="col-xs-2">
-                        <input type="submit" class="btn btn-warning w-100" value="Send"/>
+                        <input type="submit" class="btn btn-warning btn-block" value="Send"/>
                     </div>
                         </div>
                     </div>
@@ -96,10 +97,10 @@ if($count==0){
       </div>
 	<!--Footer-->
       <footer class="footer">
-        
+        <br>Project04<br>
       </footer>
 
-    </div>   
+      
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
   </body>
