@@ -30,7 +30,7 @@ if($count==0){
         <nav>
           <ul class="nav nav-pills pull-right">
             <li role="presentation" class="active"><a href="index.php">Home</a></li>
-            <li role="presentation"><a href="login.php">Login</a></li>
+            <li role="presentation"><a href="login.php">Logout</a></li>
           </ul>
         </nav>
         <h3 class="text-muted">Chat Room</h3>
