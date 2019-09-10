@@ -42,7 +42,12 @@ if($count==0){
        <div class=" col-xs-12">
         <br>
         <div id="show">
+          <?php
+          $scrollCounter=0;
+          $_SESSION['varname4']=$scrollCounter;
+          ?>
         </div>
+        
         <br>
        </div>
        
@@ -71,6 +76,8 @@ if($count==0){
       
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+
+    <!--Auto refresh function (Interval - 1000)-->
     <script type="text/javascript">
       $(document).ready(function(){
         setInterval(function(){
@@ -78,6 +85,8 @@ if($count==0){
         },1000);
       });
     </script>
+
+    <!--Send messages when click send button-->
     <script type="text/javascript">
       function insertData() {
         var message=$("#message").val();    
@@ -92,18 +101,21 @@ if($count==0){
                 $("p").addClass("alert alert-success");
                 }
             });
+             
     
     }
     
       </script>
+
+    <!--When press enter send messages-->
     <script>
-    
-$(document).ready(function(){
+    $(document).ready(function(){
     $('#message').keypress(function(e){
       if(e.keyCode==13)
       $('#send').click();
     });
-});
+    });
     </script>
+
   </body>
 </html>

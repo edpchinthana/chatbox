@@ -4,12 +4,14 @@ session_start();
 $count=$_SESSION['varname1'];
 $username=$_SESSION['varname2'];
 $userid=$_SESSION['varname3'];
+$scrollCounter=$_SESSION['varname4'];
 if($count==0){
     header ("Location:login.php");
 }
 ?>
 
-<?php
+<?php   
+        
         include('includes/database.php');
         $query="SELECT chat.message as 'message', users.name as 'userid',chat.dateTime from users inner join chat on users.id=chat.userId order by dateTime ASC;";
         $result=$mysqli->query($query);
@@ -27,10 +29,14 @@ if($count==0){
                 $output .='</b></h5>';
                 $output .= $row['message'].'<br>';
                 $output .='</div><br>';
-                $output .='<script>window.scrollBy(0, 50);</script>';
+                if($scrollCounter==0){
+                $output .='<script>window.scrollBy(0, 60);</script>';
+                }
                 echo $output;
             }
         }else{
-            echo '<span style="color:red;">Sorry, no students records were found</span>';
+            echo '<span style="color:red;">Sorry, no previous messages were found</span>';
         }
+        $scrollCounter++;
+        $_SESSION['varname4']=$scrollCounter;
         ?>
