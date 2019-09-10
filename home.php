@@ -1,3 +1,15 @@
+<?php
+//Security system
+session_start();
+$count=$_SESSION['varname1'];
+$username=$_SESSION['varname2'];
+$userid=$_SESSION['varname3'];
+$firstName=$_SESSION['varname4'];
+$lastName=$_SESSION['varname5'];
+if($count==0){
+    header ("Location:index.php");
+}
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -19,12 +31,13 @@
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="index.php">Home</a></li>
-            <li role="presentation"><a href="about.php">About</a></li>
-            <li role="presentation"><a href="login.php">Login</a></li>
+            <li class="active" role="presentation"><a href="about.php">Settings</a></li>
+            <li role="presentation"><a href="login.php">Logout</a></li>
           </ul>
         </nav>
-        <h3 class="text-muted">Home</h3>
+        <h3 class="text-muted">Hello
+            <?php echo $firstName; ?> 
+        </h3>
       </div>
 
     <div class="jumbotron">
@@ -38,20 +51,21 @@
              <li class="list-group-item"><button class="btn" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Test</button></li>
              <!--Importing users to an unordered list-->
              <?php
-              session_start();
               include('includes/database.php');
               //Create login query        
-                $query="SELECT first_name as 'First Name' , last_name as 'Last Name' from users;"; 
+                $query="SELECT first_name as 'First Name' , last_name as 'Last Name', id as 'id' from users;"; 
 	            //Get results
               $result=$mysqli->query($query);
               if($result->num_rows>0){
                 //Loop through results
                 while($row=$result->fetch_assoc()){
-                    //Display student info    
+                    //Display student info   
+                    if($row['id']!=$userid){
                     $output  ='<li class="list-group-item">';
                     $output .=$row['First Name'].'&nbsp;'.$row['Last Name'];
                     $output .='</li>';
                     echo $output;
+                    }
                 }
             }else{
                 echo '<span style="color:red;">Sorry, no users were found</span>';

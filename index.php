@@ -29,7 +29,8 @@ session_start();
             <li role="presentation"><a href="login.php">Login</a></li>
           </ul>
         </nav>
-        <h3 class="text-muted">Home</h3>
+        <h3 class="text-muted">Home  
+        </h3>
       </div>
 
 	<!--Body-->
@@ -53,7 +54,7 @@ session_start();
                         <div class="row">
                             <div class="col-xs-12 col-md-4"></div>
                             <div class="card border-warning col-xs-12 col-md-4">
-                            <form role="form" method="" action="">
+                            <form id="loginForm" role="form" method="post" action="">
                                 <div class="form-group">
                                     <br>
                                     <label>Username</label>
@@ -67,8 +68,11 @@ session_start();
                                 <?php
                                     include('includes/database.php');
                                     
-                                    $username="dasdad";
+                                    $username="test";
                                     $userid="999";
+                                    $firstName="test";
+                                    $lastName="test";
+
                                     
                               if($_POST){
                                 //submitting values
@@ -77,7 +81,7 @@ session_start();
                                 $count=0;
               
                             //Create login query
-                                $query="SELECT password,id FROM users where username='$username';"; 
+                                $query="SELECT password,id,first_name,last_name FROM users where username='$username';"; 
                             //Get results
                                 $result=$mysqli->query($query);
                             //Check if the end of the results
@@ -87,15 +91,17 @@ session_start();
                                 if($row['password']==$password){
                                               $count=1;
                                               $userid=$row['id'];
+                                              $firstName=$row['first_name'];
+                                              $lastName=$row['last_name'];
                               }
                             }
                             if($count==0){
                               //Printing the error
                               echo '<br><span style="color:red;">'."<br>Incorrect username or password.".'</span>';	
                             }else if($count==1){
-                              //If the username and password are matched then proceed to menu.php
+                              //If the username and password are matched then proceed to home.php
                               $count=3;
-                              header("Location:chatroom.php");
+                              header("Location:home.php");
                               }
                                 }
                               else{
@@ -108,6 +114,8 @@ session_start();
                         $abc=strtolower($username);
                         $_SESSION['varname2']=$abc;
                         $_SESSION['varname3']=$userid;
+                        $_SESSION['varname4']=$firstName;
+                        $_SESSION['varname5']=$lastName;
                 ?>    
                         </form>
                             
