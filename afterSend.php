@@ -29,9 +29,7 @@ if($count==0){
                 $output .='</b></h5>';
                 $output .= $row['message'].'<br>';
                 $output .='</div><br>';
-                if($scrollCounter==0){
-                $output .='<script>window.scrollBy(0, 100);</script>';
-                }
+                $output .='<script>window.scrollBy(0, 100);</script>';     
                 echo $output;
             }
         }else{

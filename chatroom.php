@@ -91,7 +91,7 @@ if($count==0){
       function insertData() {
         var message=$("#message").val();    
     // AJAX code to send data to php file.
-            $.ajax({
+    $.ajax({
                 type: "POST",
                 url: "sendMsg.php",
                 data: {message:message},
@@ -101,11 +101,11 @@ if($count==0){
                 $("p").addClass("alert alert-success");
                 }
             });
-             
-    
+            //This is to refresh page after send a message
+            $('#show').load('afterSend.php');
     }
     
-      </script>
+    </script>
 
     <!--When press enter send messages-->
     <script>
