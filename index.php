@@ -207,11 +207,8 @@ session_start();
     <!--Send messages when click send button-->
     <script type="text/javascript">
         function checkNames() {
-        var username3=$("#username2").val();   
-    // AJAX code to send data to php file.
-    $.post("checkNames.php",{username:username3});
-            //This is to refresh page after send a message
-            $('#showName').load('checkNames.php');
+        var username3=$("#username2").val();          
+         $('#showName').load('checkNames.php?username='+username3);
     }
         </script>
   </body>

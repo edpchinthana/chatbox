@@ -1,11 +1,11 @@
 <?php                            
     session_start();      
     include('includes/database.php');
-    $username =$_POST['username'];
-    $username="user";
+    $username =$_GET['username'];
     $nameCount=0;
-    echo "$username";
+    $username=strtolower($username);
     //Create login query
+    if($username!=""){
     $query="SELECT username FROM users;"; 
     //Get results
     $result=$mysqli->query($query);
@@ -19,12 +19,13 @@
         }
         if($nameCount==0){
             //Printing the error
-            echo '<br><span style="color:rgb(7, 173, 2);">'."&nbsp;&nbsp;&nbsp;&nbsp;Available!".'</span>';	
+            echo '<span style="color:rgb(7, 173, 2);">'."&nbsp;&nbsp;&nbsp;&nbsp;Available!".'</span>';	
         }else if($nameCount==1){
             //If the username and password are matched then proceed to menu.php
-             echo '<br><span style="color:rgb(255, 0, 0);">'."&nbsp;&nbsp;&nbsp;&nbsp;Name is not available!".'</span>';	
+             echo '<span style="color:rgb(255, 0, 0);">'."&nbsp;&nbsp;&nbsp;&nbsp;Name is not available!".'</span>';	
         }
         }
+    }
                                 
        
 ?>
