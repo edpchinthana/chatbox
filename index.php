@@ -203,7 +203,6 @@ session_start();
 
     </div>   
 
-
     <!--Checks the entered username is available in the database-->
     <script type="text/javascript">
         function checkNames() {
@@ -211,7 +210,6 @@ session_start();
          $('#showName').load('checkNames.php?username='+username3);
     }
     </script>
-
 
     <!--Check the name is available and passwords are matched then proceed to create new user account-->
     <script type="text/javascript">
@@ -222,9 +220,11 @@ session_start();
       var username2=$("#username2").val();
       var password2=$("#password2").val();
       var rePassword2=$("#rePassword2").val();
-
+      $('#showName').load('signUp.php?username='+username2+'&firstName='+firstName+'&lastName='+lastName+'&email='+email+'&password2='+password2+'&rePassword2='+rePassword2);  
     }
     </script>
+
+
 
 
   </body>
