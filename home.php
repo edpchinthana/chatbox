@@ -100,7 +100,7 @@ include('includes/database.php');
     </div>
 
           <!--To avoid the overlap in mobile view-->
-          <div class="jumbotron jumbotron-fluid p-5">
+          <div class="jumbotron jumbotron-fluid p-5 m-5">
             </div>
 
     </div>
@@ -126,7 +126,7 @@ include('includes/database.php');
 
     <!--Send messages when click send button-->
     <script type="text/javascript">
-    var chatPartner=999;
+    var chatPartner=0;
       function importChats(x) {   
         
          chatPartner = x;
@@ -160,12 +160,28 @@ include('includes/database.php');
     
     <!--Auto refresh function (Interval - 1000)-->
     <script type="text/javascript">
+      
       $(document).ready(function(){
         setInterval(function(){
-          $('#showChats').load('refreshChat.php?cp='+chatPartner);
+          if(chatPartner!=0){
+          $('#showChats').load('refreshChat.php?cp='+chatPartner);}
         },1000);
       });
+      
     </script>
+
+     <!--When press enter send messages-->
+      <script>
+            $(document).ready(function(){
+            $('#message').keypress(function(e){
+              if(e.keyCode==13)
+              $('#send').click();
+            });
+            });
+            $("#sendForm").submit(function(e) {
+            e.preventDefault();
+        });
+      </script>
 
 
 
