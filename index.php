@@ -15,6 +15,8 @@ session_start();
     <title>Let's Chat</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap2.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
   </head>
 
   <body>
@@ -200,8 +202,7 @@ session_start();
       </footer>
 
     </div>   
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+
 
     <!--Send messages when click send button-->
     <script type="text/javascript">

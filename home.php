@@ -6,6 +6,7 @@ $username=$_SESSION['varname2'];
 $userid=$_SESSION['varname3'];
 $firstName=$_SESSION['varname4'];
 $lastName=$_SESSION['varname5'];
+$contacts;
 if($count==0){
     header ("Location:index.php");
 }
@@ -19,9 +20,11 @@ if($count==0){
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="css/myCSS.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap2.min.css">
+    
+
+    
   </head>
 
   <body>
@@ -48,7 +51,6 @@ if($count==0){
              <li class="list-group-item list-group-item-warning ">
                 Chat
              </li>
-             <li class="list-group-item"><button class="btn" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Test</button></li>
              <!--Importing users to an unordered list-->
              <?php
               include('includes/database.php');
@@ -61,9 +63,9 @@ if($count==0){
                 while($row=$result->fetch_assoc()){
                     //Display student info   
                     if($row['id']!=$userid){
-                    $output  ='<li class="list-group-item">';
+                    $output  ='<li class="list-group-item"><input id="'.$row['id'].'" type="button"  value="';
                     $output .=$row['First Name'].'&nbsp;'.$row['Last Name'];
-                    $output .='</li>';
+                    $output .='"onclick="importChats('.$row['id'].')" /></li>';
                     echo $output;
                     }
                 }
@@ -73,17 +75,38 @@ if($count==0){
              ?>
             </ul>
       </div>
+
+      <!--Message Viewer-->
       <div class="col-md-8">
-          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="">
-              <div class="card card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-              </div>
-            </div>
+          <div id="showChats">
+              <?php
+              $scrollCounter=0;
+              $_SESSION['varname6']=$scrollCounter;
+              ?>
+          </div>
       </div>
     </div>
 
     </div>
+
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+
+    <!--Send messages when click send button-->
+    <script type="text/javascript">
+      function importChats(x) {   
+        
+        var chatPartner = x;
+        //This is to refresh page after send a message
+        $('#showChats').load('importChats.php?cp='+chatPartner);
+    }
+    
+    </script>
+
+
+
+
+
+
     </body>
 </html>
