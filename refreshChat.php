@@ -7,7 +7,7 @@ $username=$_SESSION['varname2'];
 $userid=$_SESSION['varname3'];
 $firstName=$_SESSION['varname4'];
 $LastName=$_SESSION['varname5'];
-$scrollCounter=$_SESSION['varname6'];
+
 if($count==0){
     header ("Location:login.php");
 }
@@ -67,14 +67,9 @@ if($count==0){
                 $output .= $row['message'].'</div><div class="text-muted text-right">';
                 $output .=$row['date'].'</div>';
                 $output .='</div><br>';
-                if($scrollCounter==0){
-                $output .='<script>window.scrollBy(0, 100);</script>';
-                }
                 echo $output;
             }
         }else{
             echo '<span style="color:red;">Sorry, no previous messages were found</span>';
         }
-        $scrollCounter++;
-        $_SESSION['varname4']=$scrollCounter;
         ?>

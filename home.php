@@ -10,6 +10,18 @@ $contacts;
 if($count==0){
     header ("Location:index.php");
 }
+include('includes/database.php');
+ //query to import user details
+  $query="SELECT first_name, last_name from users where id=$userid;";
+  $result=$mysqli->query($query);
+        if($result->num_rows>0){
+            while($row=$result->fetch_assoc()){
+                $firstName=$row['first_name'];
+                $lastName=$row['last_name'];
+            }
+        }
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -35,7 +47,7 @@ if($count==0){
         <nav>
           <ul class="nav nav-pills pull-right">
             <li class="active" role="presentation"><a href="about.php">Settings</a></li>
-            <li role="presentation"><a href="login.php">Logout</a></li>
+            <li role="presentation"><a href="index.php">Logout</a></li>
           </ul>
         </nav>
         <h3 class="text-muted">Hello
@@ -43,17 +55,17 @@ if($count==0){
         </h3>
       </div>
 
-    <div class="jumbotron">
+    <div>
     <div class="row">
-      <div class="col-sm-5 col-md-3">
+      <div class="container m-0 col-sm-5 col-md-3">
         <!--Users List-->
           <ul class="list-group">
-             <li class="list-group-item list-group-item-warning ">
-                Chat
+             <li class="list-group-item bg-warning "><h4>
+                Chat</h4>
              </li>
              <!--Importing users to an unordered list-->
              <?php
-              include('includes/database.php');
+              
               //Create login query        
                 $query="SELECT first_name as 'First Name' , last_name as 'Last Name', id as 'id' from users;"; 
 	            //Get results
@@ -63,7 +75,7 @@ if($count==0){
                 while($row=$result->fetch_assoc()){
                     //Display student info   
                     if($row['id']!=$userid){
-                    $output  ='<li class="list-group-item"><input id="'.$row['id'].'" type="button"  value="';
+                    $output  ='<li class="list-group-item bg-light"><input id="'.$row['id'].'" class="btn btn-block" type="button"  value="';
                     $output .=$row['First Name'].'&nbsp;'.$row['Last Name'];
                     $output .='"onclick="importChats('.$row['id'].')" /></li>';
                     echo $output;
@@ -77,7 +89,7 @@ if($count==0){
       </div>
 
       <!--Message Viewer-->
-      <div class="col-md-8">
+      <div class="container m-0 col-md-8 bg-light">
           <div id="showChats">
               <?php
               $scrollCounter=0;
@@ -87,20 +99,72 @@ if($count==0){
       </div>
     </div>
 
+          <!--To avoid the overlap in mobile view-->
+          <div class="jumbotron jumbotron-fluid p-5">
+            </div>
+
     </div>
+          <!--Fixed div includes form - send messages-->
+          <div class="jumbotron fixed-bottom p-4 m-0" style="background-color:rgb(243, 237, 150)">
+              <form role="form" id="sendForm" method="" action="">
+                      <div class="form-group">
+                          <div class="row">
+                          <div class="col-xs-10">
+                          <input name="text" id="message" type="text" class="form-control" placeholder="Enter your message">
+                          </div>
+                          <div class="col-xs-2">
+                          <button type="button" id="send" class="btn btn-warning btn-block" onclick="insertData(); document.getElementById('message').value='';">Send</button>
+                      </div>
+                          </div>
+                      </div>
+                      
+                  </form>
+        </div>
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
     <!--Send messages when click send button-->
     <script type="text/javascript">
+    var chatPartner=999;
       function importChats(x) {   
         
-        var chatPartner = x;
+         chatPartner = x;
         //This is to refresh page after send a message
         $('#showChats').load('importChats.php?cp='+chatPartner);
     }
+    </script>
+        <!--Send messages when click send button-->
+        <script type="text/javascript">
+          function insertData() {
+            var message=$("#message").val();    
+            //This is to refresh page after send a message
+            $('#showChats').load('sendMsg.php?msg='+message+'&cp='+chatPartner);
+                console.log(message);
+        }
+        
+        </script>
     
+        <!--When press enter send messages-->
+        <script>
+        $(document).ready(function(){
+        $('#message').keypress(function(e){
+          if(e.keyCode==13)
+          $('#send').click();
+        });
+        });
+        $("#sendForm").submit(function(e) {
+        e.preventDefault();
+    });
+        </script>
+    
+    <!--Auto refresh function (Interval - 1000)-->
+    <script type="text/javascript">
+      $(document).ready(function(){
+        setInterval(function(){
+          $('#showChats').load('refreshChat.php?cp='+chatPartner);
+        },1000);
+      });
     </script>
 
 
