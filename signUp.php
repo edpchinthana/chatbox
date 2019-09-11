@@ -1,111 +1,80 @@
-<!--Security system-->
-<?php
- $count=0;
+<?php                            
+    session_start();      
+    include('includes/database.php');
+    $username =$_GET['username'];
+    $firstName =$_GET['firstName'];
+    $lastName =$_GET['lastName'];
+    $password2 =$_GET['password2'];
+    $rePassword2 =$_GET['rePassword2'];
+    $email=$_GET['username'];
+
+
+
+
+    $nameCount=0;
+    $username=strtolower($username);
+    if($username!=""&&$firstName!=""&&$lastName!=""&&$password2!=""&&$rePassword2!=""){
+      //Create check name query
+    $query="SELECT username FROM users;"; 
+    //Get results
+    $result=$mysqli->query($query);
+    //Check if the end of the results
+    if($result->num_rows>0){
+    //Loop through results
+        while($row = $result->fetch_assoc()){
+            if($row['username']==$username){
+                $nameCount=1;
+            }
+        }
+        if($nameCount==0){
+            //Proceed to login
+            if($password2==$rePassword2){
+               //Create check name query
+              $query="INSERT INTO `users` (`first_name`, `last_name`, `email`,`username`, `password`) VALUES ('$firstName', '$lastName', '$email', '$username', '$password2');"; 
+              //Run query
+               $result=$mysqli->query($query);
+
+               //Create table
+               $query1="CREATE TABLE `$username` (`id` int(6) NOT NULL,`chatPartner` int(6) NOT NULL,`type` int(1) NOT NULL DEFAULT '0',`message` varchar(100) NOT NULL,`date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+               //Run query1
+               $result=$mysqli->query($query1);
+
+               //Create primary key
+               $query2="ALTER TABLE `$username` ADD PRIMARY KEY (`id`), ADD KEY `chatPartner` (`chatPartner`);";
+                //Run query3
+                $result=$mysqli->query($query2);
+
+              //Create foreign key
+              $query3="ALTER TABLE `$username` ADD  CONSTRAINT `$username _ibfk_1` FOREIGN KEY (`chatPartner`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;";
+              //Run query3
+              $result=$mysqli->query($query3);
+              
+              echo "<span style='color:rgb(0, 81, 255);'>Registration process is completed. Please login and enjoy Lets chat</span>";
+              echo "<script type='text/javascript'>document.getElementById('firstName').value='';</script>";
+              echo "<script type='text/javascript'>document.getElementById('lastName').value='';</script>";
+              echo "<script type='text/javascript'>document.getElementById('email').value='';</script>";
+              echo "<script type='text/javascript'>document.getElementById('username2').value='';</script>";
+              echo "<script type='text/javascript'>document.getElementById('password2').value='';</script>";
+              echo "<script type='text/javascript'>document.getElementById('rePassword2').value='';</script>";
+
+
+
+            }else{
+              echo '<span style="color:rgb(255, 0, 0);">'."&nbsp;&nbsp;&nbsp;&nbsp;Entered passwords did not match".'</span>';
+            }
+            	
+        }else if($nameCount==1){
+            //Display the entered username is not available
+             echo '<span style="color:rgb(255, 0, 0);">'."&nbsp;&nbsp;&nbsp;&nbsp;Username is not available!".'</span>';	
+        }
+        }
+        
+        
+    }else{
+      echo '<span style="color:rgb(255, 0, 0);">'."&nbsp;&nbsp;&nbsp;&nbsp;All fields should be filled".'</span>';
+    }
+       
+    
+
+       
 ?>
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-    <title>Let's Chat</title>
-    <link rel="stylesheet" type="text/css" href="css/myCSS.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap2.min.css">
-  </head>
-
-  <body>
-
-	<!--Menu bar-->
-    <div class="container">
-      <div class="header clearfix">
-        <nav>
-          <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="index.php">Home</a></li>
-            <li role="presentation"><a href="about.php">About</a></li>
-            <li role="presentation"><a href="login.php">Login</a></li>
-          </ul>
-        </nav>
-        <h3 class="text-muted">Home</h3>
-      </div>
-
-	<!--Body-->
-      <div class="jumbotron">
-        <h1 class="text-center">Lets Chat</h1>
-        <div class="row">
-                <div class="col-xs-12 col-md-4"></div>
-                <div class="card border-warning col-xs-12 col-md-4">
-                <form role="form" method="post" action="login.php">
-                    <div class="form-group">
-                        <br>
-                        <label>Username</label>
-                        <input name="username" type="username" class="form-control" placeholder="Username">
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label><br>
-                        <input name="password" type="password" class="form-control" placeholder="Password">
-                    </div>
-                    <input type="submit" class="btn btn-warning w-50 mx-auto" value="Login"/>
-                    <?php
-                        include('includes/database.php');
-                        session_start();
-                        $username="dasdad";
-                        $userid="999";
-                        
-		            	if($_POST){
-                    //submitting values
-			            	$username =$_POST['username'];
-				            $password =$_POST['password'];
-				            $count=0;
-	
-			        	//Create login query
-			            	$query="SELECT password,id FROM users where name='$username';"; 
-			        	//Get results
-				            $result=$mysqli->query($query);
-			        	//Check if the end of the results
-			            	if($result->num_rows>0){
-			            		//Loop through results
-			            		while($row = $result->fetch_assoc()){
-			        			if($row['password']==$password){
-                                  $count=1;
-                                  $userid=$row['id'];
-				        	}
-			        	}
-			        	if($count==0){
-				        	//Printing the error
-			        		echo '<br><span style="color:red;">'."<br>Incorrect username or password.".'</span>';	
-			        	}else if($count==1){
-			        		//If the username and password are matched then proceed to menu.php
-			        		$count=3;
-			        		header("Location:chatroom.php");
-			        		}
-			            	}
-		            	else{
-			        	//Printing the error
-			        	echo '<span style="color:red;">'."Incorrect username or password.".'</span>';
-		        	}
-		    	}
-			//Passing the count to next page-for security
-            $_SESSION['varname1']=$count;
-            $abc=strtolower($username);
-            $_SESSION['varname2']=$abc;
-            $_SESSION['varname3']=$userid;
-		?>    
-                </form>
-                
-                <br>
-            </div>
-        </div>
-      </div>
-	<!--Footer-->
-      <footer class="footer">
-        <p>&copy; 2019 Project01.</p>
-      </footer>
-
-    </div>   
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-  </body>
-</html>

@@ -18,10 +18,10 @@
             }
         }
         if($nameCount==0){
-            //Printing the error
+            //Display the entered username is available
             echo '<span style="color:rgb(7, 173, 2);">'."&nbsp;&nbsp;&nbsp;&nbsp;Username is available!".'</span>';	
         }else if($nameCount==1){
-            //If the username and password are matched then proceed to menu.php
+            //Display the entered username is not available
              echo '<span style="color:rgb(255, 0, 0);">'."&nbsp;&nbsp;&nbsp;&nbsp;Username is not available!".'</span>';	
         }
         }
