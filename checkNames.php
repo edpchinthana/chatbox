@@ -19,12 +19,13 @@
         }
         if($nameCount==0){
             //Printing the error
-            echo '<span style="color:rgb(7, 173, 2);">'."&nbsp;&nbsp;&nbsp;&nbsp;Available!".'</span>';	
+            echo '<span style="color:rgb(7, 173, 2);">'."&nbsp;&nbsp;&nbsp;&nbsp;Username is available!".'</span>';	
         }else if($nameCount==1){
             //If the username and password are matched then proceed to menu.php
-             echo '<span style="color:rgb(255, 0, 0);">'."&nbsp;&nbsp;&nbsp;&nbsp;Name is not available!".'</span>';	
+             echo '<span style="color:rgb(255, 0, 0);">'."&nbsp;&nbsp;&nbsp;&nbsp;Username is not available!".'</span>';	
         }
         }
+        $_SESSION['nameChecked']=$nameCount;
     }
                                 
        

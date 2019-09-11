@@ -148,17 +148,17 @@ session_start();
                                 <div class="form-group col-md-6">
                                   
                                     <label>First Name</label>
-                                    <input name="firstName" type="text" class="form-control" placeholder="First Name">
+                                    <input id="firstName" type="text" class="form-control" placeholder="First Name">
                                 </div>
                                 <div class="form-group col-md-6">
                     
                                     <label>Last Name</label>
-                                    <input name="lastName" type="Text" class="form-control" placeholder="Last Name">
+                                    <input id="lastName" type="Text" class="form-control" placeholder="Last Name">
                                 </div></div>
                                 <div class="form-group">
                                     
                                     <label>Email Address</label>
-                                    <input name="email" type="email" class="form-control" placeholder="Email Address">
+                                    <input id="email" type="email" class="form-control" placeholder="Email Address">
                                 </div>
       
                                 <div class="form-group">
@@ -176,14 +176,14 @@ session_start();
                               <div class="row">
                                 <div class="form-group col-md-6">
                                     <label>Password</label>
-                                    <input name="password2" type="password" class="form-control" placeholder="Password">
+                                    <input id="password2" type="password" class="form-control" placeholder="Password">
                                 </div></div>
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label>Re-Type Password</label>
-                                        <input name="rePassword2" type="password" class="form-control" placeholder="Password">
+                                        <input id="rePassword2" type="password" class="form-control" placeholder="Password">
                                     </div></div>
-                                <input type="button" class="btn btn-warning w-25 mx-auto float-right" value="SignUp"/>  
+                                <input type="button" class="btn btn-warning w-25 mx-auto float-right" onclick="signUp();" value="SignUp"/>  
                             </form>
                             
                             <br>
@@ -204,12 +204,28 @@ session_start();
     </div>   
 
 
-    <!--Send messages when click send button-->
+    <!--Checks the entered username is available in the database-->
     <script type="text/javascript">
         function checkNames() {
         var username3=$("#username2").val();          
          $('#showName').load('checkNames.php?username='+username3);
     }
-        </script>
+    </script>
+
+
+    <!--Check the name is available and passwords are matched then proceed to create new user account-->
+    <script type="text/javascript">
+    function signUp(){
+      var firstName=$("#firstName").val();
+      var lastName=$("#lastName").val();
+      var email=$("#email").val();
+      var username2=$("#username2").val();
+      var password2=$("#password2").val();
+      var rePassword2=$("#rePassword2").val();
+
+    }
+    </script>
+
+
   </body>
 </html>
