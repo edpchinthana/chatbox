@@ -60,7 +60,7 @@ if($count==0){
             echo "<div class='position-sticky col-md-12 bg-warning' style='top:5px;z-index:1;'><h3>".$partnerFirstName."&nbsp;&nbsp;".$partnerLastName."</h3></div><div class='bg-light' style='z-index:-2;'>";
               
      //Importing messages
-     $query="SELECT message,type,date from $userTableName where chatpartner=$chatPartnerId;";
+     $query="select * from(SELECT message,type,date from $userTableName where chatpartner=$chatPartnerId order by date desc LIMIT 15)Var1 order by date asc;";
      $result=$mysqli->query($query);
      if($result->num_rows>0){
          //Loop through results
