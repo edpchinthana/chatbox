@@ -52,8 +52,8 @@ include('includes/database.php');
         </nav>
         <h3 class="text-muted">Hello
             <?php echo $firstName; ?> 
-        </h3>
-      </div>
+        </h3> 
+    </div>
 
     <div>
         <div class="position-sticky m-0 col-sm-5 col-md-3" style="top: 5px;">
@@ -165,7 +165,7 @@ include('includes/database.php');
         setInterval(function(){
           if(chatPartner!=0){
           $('#showChats').load('refreshChat.php?cp='+chatPartner);}
-        },1000);
+        },100000);
       });
       
     </script>
