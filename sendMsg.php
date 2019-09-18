@@ -56,8 +56,9 @@ if($count==0){
         $result=$mysqli->query($query);  
     }
             //Setting chat header
-            echo "<div class='card col-md-12 bg-warning'><h3>".$partnerFirstName."&nbsp;&nbsp;".$partnerLastName."</h3></div>";
-    
+            echo "<div class='m-0 col-md-12 bg-light'>";
+            echo "<div class='position-sticky col-md-12 bg-warning' style='top:5px;z-index:1;'><h3>".$partnerFirstName."&nbsp;&nbsp;".$partnerLastName."</h3></div><div class='bg-light' style='z-index:-2;'>";
+              
      //Importing messages
      $query="SELECT message,type,date from $userTableName where chatpartner=$chatPartnerId;";
      $result=$mysqli->query($query);
@@ -84,6 +85,7 @@ if($count==0){
      }else{
          echo '<span style="color:red;">Sorry, no previous messages were found</span>';
      }   
+     echo "</div></div>";
     
     
 ?>
