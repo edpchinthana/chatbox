@@ -165,7 +165,7 @@ include('includes/database.php');
         setInterval(function(){
           if(chatPartner!=0){
           $('#showChats').load('refreshChat.php?cp='+chatPartner);}
-        },100000);
+        },1000);
       });
       
     </script>
