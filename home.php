@@ -56,46 +56,46 @@ include('includes/database.php');
       </div>
 
     <div>
-    <div class="row">
-      <div class="container m-0 col-sm-5 col-md-3">
-        <!--Users List-->
-          <ul class="list-group">
-             <li class="list-group-item bg-warning "><h4>
-                Chat</h4>
-             </li>
-             <!--Importing users to an unordered list-->
-             <?php
-              
-              //Create login query        
-                $query="SELECT first_name as 'First Name' , last_name as 'Last Name', id as 'id' from users;"; 
-	            //Get results
-              $result=$mysqli->query($query);
-              if($result->num_rows>0){
-                //Loop through results
-                while($row=$result->fetch_assoc()){
-                    //Display student info   
-                    if($row['id']!=$userid){
-                    $output  ='<li class="list-group-item bg-light"><input id="'.$row['id'].'" class="btn btn-block" type="button"  value="';
-                    $output .=$row['First Name'].'&nbsp;'.$row['Last Name'];
-                    $output .='"onclick="importChats('.$row['id'].')" /></li>';
-                    echo $output;
+        <div class="position-sticky m-0 col-sm-5 col-md-3" style="top: 5px;">
+            <!--Users List-->
+              <ul class="list-group">
+                 <li class="list-group-item bg-warning "><h4>
+                    Chat</h4>
+                 </li>
+                 <!--Importing users to an unordered list-->
+                 <?php
+                  
+                  //Create login query        
+                    $query="SELECT first_name as 'First Name' , last_name as 'Last Name', id as 'id' from users;"; 
+                  //Get results
+                  $result=$mysqli->query($query);
+                  if($result->num_rows>0){
+                    //Loop through results
+                    while($row=$result->fetch_assoc()){
+                        //Display student info   
+                        if($row['id']!=$userid){
+                        $output  ='<li class="list-group-item bg-light"><input id="'.$row['id'].'" class="btn btn-block" type="button"  value="';
+                        $output .=$row['First Name'].'&nbsp;'.$row['Last Name'];
+                        $output .='"onclick="importChats('.$row['id'].')" /></li>';
+                        echo $output;
+                        }
                     }
+                }else{
+                    echo '<span style="color:red;">Sorry, no users were found</span>';
                 }
-            }else{
-                echo '<span style="color:red;">Sorry, no users were found</span>';
-            }
-             ?>
-            </ul>
-      </div>
-
+                 ?>
+                </ul>
+          </div>
+    <div class="row">
       <!--Message Viewer-->
-      <div class="container m-0 col-md-8 bg-light">
-          <div id="showChats">
+      
+      
+          <div class="container bg-light" id="showChats">
               <?php
               $scrollCounter=0;
               $_SESSION['varname6']=$scrollCounter;
               ?>
-          </div>
+          
       </div>
     </div>
 
@@ -165,7 +165,7 @@ include('includes/database.php');
         setInterval(function(){
           if(chatPartner!=0){
           $('#showChats').load('refreshChat.php?cp='+chatPartner);}
-        },1000);
+        },100000);
       });
       
     </script>

@@ -44,7 +44,8 @@ if($count==0){
             }
         }
         //Setting chat header
-        echo "<div class='card col-md-12 bg-warning'><h3>".$partnerFirstName."&nbsp;&nbsp;".$partnerLastName."</h3></div>";
+        echo "<div class='position-sticky col-md-12 bg-warning' style='top:5px;'><h3>".$partnerFirstName."&nbsp;&nbsp;".$partnerLastName."</h3></div>";
+        echo "<div class=' m-0 col-md-12 bg-light'>";
 
 
         //Importing messages
@@ -72,4 +73,5 @@ if($count==0){
         }else{
             echo '<span style="color:red;">Sorry, no previous messages were found</span>';
         }
+        echo "</div>";
         ?>

@@ -44,9 +44,9 @@ if($count==0){
             }
         }
         //Setting chat header
-        echo "<div class='card col-md-12 bg-warning'><h3>".$partnerFirstName."&nbsp;&nbsp;".$partnerLastName."</h3></div>";
-
-
+        echo "<div class='m-0 col-md-12 bg-light'>";
+        echo "<div class='position-sticky col-md-12 bg-warning' style='top:5px;z-index:1;'><h3>".$partnerFirstName."&nbsp;&nbsp;".$partnerLastName."</h3></div><div class='bg-light' style='z-index:-2;'>";
+        
         //Importing messages
         $query="SELECT message,type,date from $userTableName where chatpartner=$chatPartnerId;";
         $result=$mysqli->query($query);
@@ -55,7 +55,7 @@ if($count==0){
             while($row=$result->fetch_assoc()){
                 //Display student info
                 if($row['type']=='0'){
-                    $output  ='<div class="card border-primary float-left col-xs-8 m-2 px-1 py-1"><h5 class="card-title py-0"><b>';
+                    $output  ='<div class="card  border-primary float-left col-xs-8 m-2 px-1 py-1"><h5 class="card-title py-0"><b>';
                     $output .=$partnerFirstName;
                 }
                 else{
@@ -75,6 +75,7 @@ if($count==0){
         }else{
             echo '<span style="color:red;">Sorry, no previous messages were found</span>';
         }
+        echo "</div></div>";
         $scrollCounter++;
         $_SESSION['varname4']=$scrollCounter;
         ?>
