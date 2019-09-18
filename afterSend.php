@@ -13,7 +13,7 @@ if($count==0){
 <?php   
         
         include('includes/database.php');
-        $query="SELECT chat.message as 'message', users.name as 'userid',chat.dateTime as 'date' from users inner join chat on users.id=chat.userId order by date ASC;";
+        $query="SELECT chat.message as 'message', users.username as 'userid',chat.dateTime as 'date' from users inner join chat on users.id=chat.userId order by date ASC;";
         $result=$mysqli->query($query);
         if($result->num_rows>0){
             //Loop through results
