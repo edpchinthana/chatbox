@@ -127,7 +127,7 @@ include('includes/database.php');
     var chatPartner=0;
       function importChats(x) {   
          chatPartner = x;
-         console.log(chatPartner);
+        // console.log(chatPartner);
         //This is to refresh page after send a message
         $('#showChats').load('importChats.php?cp='+chatPartner);
     }
