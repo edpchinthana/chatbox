@@ -48,7 +48,7 @@ if($count==0){
     if($message!=""){
     $query="INSERT INTO `$userTableName` (`chatPartner`,`type`,`message`) VALUES ('$chatPartnerId','1','$message');"; 
 	//Get results
-    $result=$mysqli->query($query);   
+    $result=$mysqli->query($query); 
 
     //Create send message query to partner's table
         $query="INSERT INTO `$chatPartnerTableName` (`chatPartner`,`type`,`message`) VALUES ('$userid','0','$message');"; 

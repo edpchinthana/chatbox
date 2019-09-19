@@ -35,7 +35,7 @@
                $result=$mysqli->query($query);
 
                //Create table
-               $query1="CREATE TABLE `$username` (`id` int(6) NOT NULL,`chatPartner` int(6) NOT NULL,`type` int(1) NOT NULL DEFAULT '0',`message` varchar(100) NOT NULL,`date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+               $query1="CREATE TABLE `$username` (`id` int(6) NOT NULL ,`chatPartner` int(6) NOT NULL,`type` int(1) NOT NULL DEFAULT '0',`message` varchar(100) NOT NULL,`date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
                //Run query1
                $result=$mysqli->query($query1);
 
@@ -48,6 +48,11 @@
               $query3="ALTER TABLE `$username` ADD  CONSTRAINT `$username _ibfk_1` FOREIGN KEY (`chatPartner`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;";
               //Run query3
               $result=$mysqli->query($query3);
+              
+              //private table id auto increment
+              $query4="ALTER TABLE `$username` CHANGE `id` `id` INT(6) NOT NULL AUTO_INCREMENT;";
+              //Run query4
+              $result=$mysqli->query($query4);
               
               echo "<span style='color:rgb(0, 81, 255);'>Registration process is completed. Please login and enjoy Lets chat</span>";
               echo "<script type='text/javascript'>document.getElementById('firstName').value='';</script>";

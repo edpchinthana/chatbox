@@ -88,8 +88,6 @@ include('includes/database.php');
           </div>
     <div class="row">
       <!--Message Viewer-->
-      
-      
           <div class="container bg-light" id="showChats">
               <?php
               $scrollCounter=0;
@@ -128,8 +126,8 @@ include('includes/database.php');
     <script type="text/javascript">
     var chatPartner=0;
       function importChats(x) {   
-        
          chatPartner = x;
+         console.log(chatPartner);
         //This is to refresh page after send a message
         $('#showChats').load('importChats.php?cp='+chatPartner);
     }
@@ -141,6 +139,7 @@ include('includes/database.php');
             //This is to refresh page after send a message
             $('#showChats').load('sendMsg.php?msg='+message+'&cp='+chatPartner);
                 console.log(message);
+                console.log(chatPartner);
         }
         
         </script>
