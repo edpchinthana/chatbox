@@ -135,11 +135,12 @@ include('includes/database.php');
         <!--Send messages when click send button-->
         <script type="text/javascript">
           function insertData() {
-            var message=$("#message").val();    
+            var message=$("#message").val();   
+            var messageEncoded= encodeURI(message);
             //This is to refresh page after send a message
-            $('#showChats').load('sendMsg.php?msg='+message+'&cp='+chatPartner);
-                console.log(message);
-                console.log(chatPartner);
+            $('#showChats').load('sendMsg.php?msg='+messageEncoded+'&cp='+chatPartner);
+                //console.log(messageEncoded);
+                //console.log(chatPartner);
         }
         
         </script>
@@ -168,24 +169,5 @@ include('includes/database.php');
       });
       
     </script>
-
-     <!--When press enter send messages-->
-      <script>
-            $(document).ready(function(){
-            $('#message').keypress(function(e){
-              if(e.keyCode==13)
-              $('#send').click();
-            });
-            });
-            $("#sendForm").submit(function(e) {
-            e.preventDefault();
-        });
-      </script>
-
-
-
-
-
-
     </body>
 </html>
