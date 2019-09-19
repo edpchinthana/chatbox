@@ -10,7 +10,7 @@
     //Get results
     $result=$mysqli->query($query);
     //Check if the end of the results
-    if($result->num_rows>0){
+    if($result->num_rows>=0){
     //Loop through results
         while($row = $result->fetch_assoc()){
             if($row['username']==$username){

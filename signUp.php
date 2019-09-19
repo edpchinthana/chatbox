@@ -19,7 +19,7 @@
     //Get results
     $result=$mysqli->query($query);
     //Check if the end of the results
-    if($result->num_rows>0){
+    if($result->num_rows>=0){
     //Loop through results
         while($row = $result->fetch_assoc()){
             if($row['username']==$username){
@@ -35,7 +35,7 @@
                $result=$mysqli->query($query);
 
                //Create table
-               $query1="CREATE TABLE `$username` (`id` int(6) NOT NULL ,`chatPartner` int(6) NOT NULL,`type` int(1) NOT NULL DEFAULT '0',`message` varchar(100) NOT NULL,`date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+               $query1="CREATE TABLE `$username` (`id` int(6) NOT NULL ,`chatPartner` int(6) NOT NULL,`type` int(1) NOT NULL DEFAULT '0',`message` varchar(200) NOT NULL,`date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
                //Run query1
                $result=$mysqli->query($query1);
 

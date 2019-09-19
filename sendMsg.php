@@ -35,7 +35,7 @@ if($count==0){
         //Importing chat partner table name, first name, last name
         $query1="select username,first_name,last_name from users where id=$chatPartnerId;";
         $result=$mysqli->query($query1);
-        if($result->num_rows>0){
+        if($result->num_rows>=0){
             while($row=$result->fetch_assoc()){
                 $chatPartnerTableName=$row['username'];
                 $partnerFirstName=$row['first_name'];
@@ -62,7 +62,7 @@ if($count==0){
      //Importing messages
      $query="select * from(SELECT message,type,date from $userTableName where chatpartner=$chatPartnerId order by date desc LIMIT 15)Var1 order by date asc;";
      $result=$mysqli->query($query);
-     if($result->num_rows>0){
+     if($result->num_rows>=0){
          //Loop through results
          while($row=$result->fetch_assoc()){
              //Display student info
