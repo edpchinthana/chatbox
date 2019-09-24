@@ -53,7 +53,7 @@ include('includes/database.php');
     </div>
 
     <div>
-        <div class=".d-none .d-sm-block collapse show m-0 col-md-3 col-sm-4 position-sticky" style="top: 5px;" id="SearchParameters">
+        <div class=".d-none .d-sm-block collapse show m-0 col-lg-3 position-sticky" style="top: 5px;" id="SearchParameters">
             <!--Users List-->
               <ul class="list-group">
                  <li class="list-group-item bg-warning ">

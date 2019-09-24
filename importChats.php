@@ -44,7 +44,7 @@ if($count==0){
             }
         }
         //Setting chat header
-        echo "<div class='m-0 col-md-12 bg-light'>";
+        echo "<div class='m-0 col-lg-12 bg-light'>";
         echo "<div class='position-sticky col-xs-12 bg-warning' style='top:5px;z-index:1;'><h3>".$partnerFirstName."&nbsp;&nbsp;".$partnerLastName."</h3></div><div class='bg-light' style='z-index:-2;'>";
         
         //Importing messages
