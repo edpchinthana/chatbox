@@ -34,9 +34,6 @@ include('includes/database.php');
     <title>Home</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap2.min.css">
-    
-
-    
   </head>
 
   <body>
@@ -56,11 +53,13 @@ include('includes/database.php');
     </div>
 
     <div>
-        <div class="position-sticky m-0 col-sm-5 col-md-3" style="top: 5px;">
+        <div class=".d-none .d-sm-block collapse show m-0 col-md-3 col-sm-4 position-sticky" style="top: 5px;" id="SearchParameters">
             <!--Users List-->
               <ul class="list-group">
-                 <li class="list-group-item bg-warning "><h4>
-                    Chat</h4>
+                 <li class="list-group-item bg-warning ">
+                    <a class="btn bg-warning w-100 p-0" id="chatCollapseButton" data-toggle="collapse" href="#chatNames" role="button" aria-expanded="false" aria-controls="chatNames">
+                        <h4>Chat</h4>
+                      </a>
                  </li>
                  <!--Importing users to an unordered list-->
                  <?php
@@ -74,9 +73,9 @@ include('includes/database.php');
                     while($row=$result->fetch_assoc()){
                         //Display student info   
                         if($row['id']!=$userid){
-                        $output  ='<li class="list-group-item bg-light"><input id="'.$row['id'].'" class="btn btn-block" type="button"  value="';
+                        $output  ='<li class="bg-light collapse show"><input id="chatNames" class="btn btn-block" type="button"  value="';
                         $output .=$row['First Name'].'&nbsp;'.$row['Last Name'];
-                        $output .='"onclick="importChats('.$row['id'].')" /></li>';
+                        $output .='"onclick="importChats('.$row['id'].'); collapseContacts();" /></li>';
                         echo $output;
                         }
                     }
@@ -88,7 +87,7 @@ include('includes/database.php');
           </div>
     <div class="row">
       <!--Message Viewer-->
-          <div class="container bg-light" id="showChats">
+          <div class="container bg-light col-xs-12" id="showChats">
               <?php
               $scrollCounter=0;
               $_SESSION['varname6']=$scrollCounter;
@@ -168,6 +167,15 @@ include('includes/database.php');
         },1000);
       });
       
+    </script>
+
+    <!--Collapse contacts-->
+    <script type="text/javascript">
+    function collapseContacts(){
+      if($(window).width() <= 500){
+        document.getElementById('chatCollapseButton').click();
+         }
+    }
     </script>
     </body>
 </html>

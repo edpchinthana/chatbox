@@ -51,7 +51,7 @@ session_start();
                       </button>
                     </h3>
                   </div>
-                  <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-xs-12 col-md-4"></div>
